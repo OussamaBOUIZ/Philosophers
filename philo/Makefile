@@ -1,12 +1,13 @@
 NAME = philo 
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
-CC = CC
+CC = cc
 
-FUNCTIONS = philo.c check_get_args.c is_integer.c ft_atoi.c sys_err.c
+FUNCTIONS = main.c  init_philos check_get_args.c is_integer.c ft_atoi.c sys_err.c\
 
 
-OBJECTS = $(FUNCTIONS: .c=.o)
+
+OBJECTS = $(FUNCTIONS:.c=.o)
 
 
 all : $(NAME)

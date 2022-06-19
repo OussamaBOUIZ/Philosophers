@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 06:52:21 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/13 08:13:13 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/19 18:18:22 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,22 @@
 		◦ time_in_ms X died	
 */
 
-void	verif_argnum(int ac)
+int	verif_argnum(int ac)
 {
 	if (ac < 5)
 	{
 		printf("INCOMPLETE ARGUMENTS ❌\n");
-		exit(EXIT_FAILURE);
+		return (1);
 	}
 	else if (ac > 6)
 	{
 		printf("EXTRA ARGUMENTS ❌\n");
-		exit(EXIT_FAILURE);
-	}	
+		return (1);
+	}
+	return (0);
 }	
 
-void	check_integer(int ac, char **av)
+int	check_integer(int ac, char **av)
 {
 	int	i;
 
@@ -51,21 +52,25 @@ void	check_integer(int ac, char **av)
 		if (!is_integer(av[i]))
 		{
 			printf("ARG NOT INTEGER ❌\n");
-			exit(EXIT_FAILURE);
+			return (1);
 		}
 		i++;
 	}
+	return (0);
 }
-
+/*
+	To-do:
+	- protecting malloc by return value rather than using exit
+*/
 t_arg	*check_get_args(int ac, char **av)
 {
 	t_arg	*args;
 	
-	verif_argnum(ac);
-	check_integer(ac, av);
+	if (verif_argnum(ac) || check_integer(ac, av))
+		return (0);
 	args = malloc(sizeof(t_arg));
 	if (!args)
-		malloc_fail();
+		return ((t_arg *)malloc_fail());
 	args->philo = ft_atoi(av[1]);
 	args->t_die = ft_atoi(av[2]);
 	args->t_eat = ft_atoi(av[3]);

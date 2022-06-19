@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 06:56:38 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/13 08:11:26 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/19 18:20:28 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,9 @@ int main(int ac, char **av)
 
 
 	args = check_get_args(ac, av);
-	printf("Number of philos : %i\n", args->philo);	
-	printf("Time to die : %i\n", args->t_die);	
-	printf("Time to eat : %i\n", args->t_eat);	
-	printf("Time to sleep : %i\n", args->t_sleep);
-	printf("Number of times each philo must eat : %i\n", args->ts_eat);
+	if (!args)
+		return (1);
+	printf("Executing...\n");
+	create_philos(args);
 	return (0);
 }

@@ -1,49 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread.c                                           :+:      :+:    :+:   */
+/*   set_up_routines.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/14 11:04:02 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/19 19:15:08 by obouizga         ###   ########.fr       */
+/*   Created: 2022/06/19 16:35:36 by obouizga          #+#    #+#             */
+/*   Updated: 2022/06/19 18:30:35 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*my_turn(void *arg)
+void	eating_routine(t_mutex *forks, time_t time_to_eat, int ph_id)
 {
-	int	i;
+	
+}
 
-	(void)arg;
-	i = -1;
-	while (1)
-	{
-		sleep(1);
-		printf("My turn\n");
-	} 
+void	*set_up_routines(t_mutex *forks, void	*arg, int ph_id)
+{
+	t_arg	*prog;
+
+	prog = (t_arg *)arg;
+	eating_routine(forks, prog->t_eat, ph_id);
+	sleeping_routine();
+	thinking_routine();
 	return (NULL);
 }
 
-void	*your_turn(void *arg)
-{
-	int	i;
-
-	(void)arg;
-	i = -1;
-	while (++i < 5)
-	{
-		sleep(1);
-		printf("Your turn\n");
-	}
-	return (NULL);
-}
-
-int main(void)
-{	
-	pthread_t thread;
-	pthread_create(&thread, NULL, my_turn, NULL);
-	your_turn(NULL);
-	return (0);	
-}
