@@ -2,13 +2,21 @@
 #include <stdio.h>
 #include "philo.h"
 
-// long	get_time(long curr)
-// {
-// 	t_tval time;
-// 	gettimeofday(&time, NULL);
-// 	return ((time.tv_sec * 1000 + time.tv_usec / 1000 ) - curr);	
-// }
+long	get_time(long curr)
+{
+	t_tval time;
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000 + time.tv_usec / 1000 ) - curr);	
+}
 
+int main()
+{
+	long start = get_time(0);
+	printf("%ld\n",start);
+	usleep(10000);
+	printf("%ld\n",get_time(start));
+
+}
 // void	*sleeping(void *arg)
 // {
 // 	printf("Sleeping...\n");
@@ -40,19 +48,19 @@ void	*put_back_fork(void	*arg)
 	return (NULL);
 }
 
-int main()
-{
+// int main()
+// {
 
-	pthread_t	thr;
-	// pthread_t	thr_2;
-	// pthread_t	thr_3;
+// 	pthread_t	thr;
+// 	// pthread_t	thr_2;
+// 	// pthread_t	thr_3;
 
-	pthread_create(&thr, NULL, take_fork, NULL);
-	// pthread_create(&thr_2, NULL, take_fork, NULL);
-	// pthread_create(&thr_3, NULL, take_fork, NULL);
-	// printf("The sate of the chop_stick is %d\n", chop_stick);
-	printf("g_state : %d\n", g_state);
-	change_g_state();
-	printf("g_state : %d\n", g_state);
+// 	pthread_create(&thr, NULL, take_fork, NULL);
+// 	// pthread_create(&thr_2, NULL, take_fork, NULL);
+// 	// pthread_create(&thr_3, NULL, take_fork, NULL);
+// 	// printf("The sate of the chop_stick is %d\n", chop_stick);
+// 	printf("g_state : %d\n", g_state);
+// 	change_g_state();
+// 	printf("g_state : %d\n", g_state);
 	
-}
+// }
