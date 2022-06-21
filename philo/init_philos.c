@@ -6,11 +6,26 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:14:02 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/21 17:10:43 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/21 18:12:30 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+t_mutex	*create_forks(t_arg	*args)
+{
+	t_mutex	*forks;
+	int		i;
+
+	forks = malloc(sizeof(t_mutex) * args->philo);
+	if (!forks)
+		return ((t_mutex *)malloc_fail());
+	i = -1;
+	while (++i < args->philo)
+		if (pthread_mutex_init(&forks[i], NULL))
+			return ((t_mutex *)pthr_fail());
+	return (forks);
+}
 
 t_philo	*get_philo_prop(t_arg	*args, int id, t_mutex *forks)
 {
@@ -33,27 +48,6 @@ t_philo	*get_philo_prop(t_arg	*args, int id, t_mutex *forks)
 	return (philo);
 }
 
-// int	create_philos(t_arg *prop, pthread_t *threads, t_mutex *forks, int m)
-// {
-// 	int		i;
-// 	t_philo	**philo;
-	
-// 	philo = malloc(sizeof(t_philo) * prop->philo);
-// 	if (!philo)
-// 		return (1);
-// 	i = 0;
-// 	while (i < prop->philo && i % 2 == m)
-// 	{
-// 		philo = get_philo_prop(prop, i + 1, forks);
-// 		if (pthread_create(&threads[i], NULL, set_up_routines, (void *)philo))
-// 			return (1);
-// 		if (usleep(100))
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
 t_philo	**create_philos(t_arg *prop, t_cmp *comp, t_mutex *forks, int m)
 {
 	int		i;
@@ -61,7 +55,7 @@ t_philo	**create_philos(t_arg *prop, t_cmp *comp, t_mutex *forks, int m)
 	
 	philo = malloc(sizeof(t_philo) * prop->philo);
 	if (!philo)
-		return (1);
+		return ();
 	i = 0;
 	while (i < prop->philo && i % 2 == m)
 	{
@@ -75,36 +69,23 @@ t_philo	**create_philos(t_arg *prop, t_cmp *comp, t_mutex *forks, int m)
 	return (philo);
 }
 
-t_mutex	*create_forks(t_arg	*args)
-{
-	t_mutex	*forks;
-	int		i;
-
-	forks = malloc(sizeof(t_mutex) * args->philo);
-	if (!forks)
-		return ((t_mutex *)malloc_fail());
-	i = -1;
-	while (++i < args->philo)
-		if (pthread_mutex_init(&forks[i], NULL))
-			return ((t_mutex *)pthr_fail());
-	return (forks);
-}
-
-
-// pthread_t	*launch_philos(t_arg *prop)
+// t_cmp	*launch_philos(t_arg *prop)
 // {
-// 	pthread_t	*threads;
-// 	t_mutex		*forks;
+// 	t_cmp	*comp;
+// 	t_mutex	*forks;
 // 	int			i;
 
-// 	threads = malloc(sizeof(pthread_t) * prop->philo);
+// 	comp = malloc(sizeof(t_cmp));
+// 	if (!comp)
+// 		return ((t_cmp *)malloc_fail());
+// 	comp->threads = malloc(sizeof(pthread_t) * prop->philo);
 // 	forks =	create_forks(prop);
-// 	if (!threads || !forks)
-// 		return ((pthread_t *)malloc_fail());
-// 	if (create_philos(prop, threads, forks, 1) || \
-// 		create_philos(prop, threads, forks, 0))
-// 		return ((pthread_t *)pthr_fail());
-// 	return (threads);
+// 	if (!comp->threads || !forks)
+// 		return ((t_cmp *)malloc_fail());
+// 	if (create_philos(prop, comp, forks, 1) || \
+// 		create_philos(prop, comp, forks, 0))
+// 		return ((t_cmp *)pthr_fail());
+// 	return (comp);
 // }
 
 
@@ -120,10 +101,11 @@ t_cmp	*launch_philos(t_arg *prop)
 		return ((t_cmp *)malloc_fail());
 	comp->threads = malloc(sizeof(pthread_t) * prop->philo);
 	forks =	create_forks(prop);
+	comp->philos =
 	if (!comp->threads || !forks)
 		return ((t_cmp *)malloc_fail());
-	if (create_philos(prop, comp->threads, forks, 1) || \
-		create_philos(prop, comp->threads, forks, 0))
+	if (create_philos(prop, comp, forks, 1) || \
+		create_philos(prop, comp, forks, 0))
 		return ((t_cmp *)pthr_fail());
 	return (comp);
 }
