@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 06:56:58 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/21 12:18:40 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/21 17:12:58 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,15 @@ typedef struct s_philo
 	int		t_eat;
 	int		t_sleep;
 	int		ts_eat;
+	long	last_eat;
 	t_mutex	*forks;
 }				t_philo;
 
-typedef struct	s_rout_a
+typedef struct s_cmp
 {
-	t_philo	philo;
-	int		id;
-}				t_rout_a;
+	pthread_t	*threads;
+	t_philo		**philos;
+}				t_cmp;
 
 typedef struct timeval	t_time;
 
@@ -58,6 +59,6 @@ t_arg		*check_get_args(int ac, char **av);
 int			ft_atoi(const char *str);
 void		*malloc_fail(void);
 long		get_time(long curr);
-pthread_t	*launch_philos(t_arg *args);
+t_cmp	*launch_philos(t_arg *args);
 
 #endif
