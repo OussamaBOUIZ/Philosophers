@@ -4,6 +4,7 @@ RM = rm -rf
 CC = cc
 
 FUNCTIONS = main.c  init_philos check_get_args.c is_integer.c ft_atoi.c sys_err.c\
+			time.c 
 
 
 

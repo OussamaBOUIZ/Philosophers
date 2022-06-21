@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:14:02 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/20 18:33:42 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/21 12:41:05 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 t_philo	*get_philo_prop(t_arg	*args, int id, t_mutex *forks)
 {
 	t_philo	*philo;
+	long	init_time;
 
 	philo = malloc(sizeof(t_philo));
 	if (!philo)
 		return ((t_philo *)malloc_fail());
+	init_time = get_time(0);
+	philo->n_philos = args->philo;
+	philo->init_time = init_time;
 	philo->id = id;
 	philo->t_die = args->t_die;
 	philo->t_eat = args->t_eat;
@@ -32,6 +36,7 @@ int	create_philos(t_arg *prop, pthread_t *threads, t_mutex *forks, int m)
 {
 	int		i;
 	t_philo	*philo;
+
 	i = 0;
 	while (i < prop->philo && i % 2 == m)
 	{
@@ -65,8 +70,8 @@ t_mutex	*create_forks(t_arg	*args)
 pthread_t	*launch_philos(t_arg *prop)
 {
 	pthread_t	*threads;
-	int			i;
 	t_mutex		*forks;
+	int			i;
 
 	threads = malloc(sizeof(pthread_t) * prop->philo);
 	forks =	create_forks(prop);
