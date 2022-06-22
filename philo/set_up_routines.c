@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 16:35:36 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/21 15:56:59 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/22 08:42:19 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,3 @@ void	*set_up_routines(void	*arg)
 	}
 	return (NULL);
 }
-
-
