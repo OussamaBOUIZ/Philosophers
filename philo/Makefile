@@ -14,7 +14,7 @@ OBJECTS = $(FUNCTIONS:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(OBJECTS)
-	$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME) -fsanitize=thread
 	echo PHILO CREATED
 
 clean :

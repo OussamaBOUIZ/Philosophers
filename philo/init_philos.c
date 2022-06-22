@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:14:02 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/22 10:22:50 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/22 11:24:57 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ int	create_philos(t_arg *prop, t_cmp *comp, int m)
 	{
 		if (i % 2 == m)
 		{
-			printf("i : %i\n", i);
 			if (pthread_create(&comp->threads[i], NULL, set_up_routines, (void *)comp->philos[i]))
 				return (1);
 			if (usleep(100))
@@ -119,8 +118,8 @@ int	create_philos(t_arg *prop, t_cmp *comp, int m)
 		}
 		i++;
 	}
-	for (int i = 0; i < prop->philo; i++)
-		pthread_join(comp->threads[i], NULL);
+	// for (int i = 0; i < prop->philo; i++)
+	// 	pthread_join(comp->threads[i], NULL);
 	return (0);
 }
 
@@ -183,7 +182,6 @@ t_cmp	*launch_philos(t_arg *prop)
 	if (create_philos(prop, comp, 1) || \
 		create_philos(prop, comp, 0))
 		return ((t_cmp *)pthr_fail());
-	exit(EXIT_FAILURE);
 	return (comp);
 }
 

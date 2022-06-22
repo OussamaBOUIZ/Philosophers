@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 16:35:36 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/22 10:14:27 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/22 10:41:54 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,17 @@ void	eating_routine(t_philo *ph)
 	int		right;
 	long	es_time;
 
-	left = ph->id;
-	right = (ph->id + 1) % ph->n_philos;
+	left = ph->id - 1;
+	right = (ph->id) % ph->n_philos;
 	pthread_mutex_lock(&ph->forks[left]); // CHECK THE ACCURACY OF THIS
-	printf("%ld %d has taken a his left fork\n", get_time(ph->init_time), ph->id);
+	printf("%ld %d has taken his left fork\n", get_time(ph->init_time), ph->id);
 	pthread_mutex_lock(&ph->forks[right]);
-	printf("%ld %d has taken a his right fork\n", get_time(ph->init_time), ph->id);
+	printf("%ld %d has taken his right fork\n", get_time(ph->init_time), ph->id);
 	printf("%ld %d is eating\n", get_time(ph->init_time), ph->id);
 	es_time = get_time(0);
+	ph->last_eat = es_time;
 	while (get_time(0) - es_time < ph->t_eat)
-		usleep(75);
+		usleep(50);
 	pthread_mutex_unlock(&ph->forks[left]);
 	pthread_mutex_unlock(&ph->forks[right]);
 }
