@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 16:35:36 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/22 08:42:19 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/22 10:14:27 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	eating_routine(t_philo *ph)
 	printf("%ld %d has taken a his left fork\n", get_time(ph->init_time), ph->id);
 	pthread_mutex_lock(&ph->forks[right]);
 	printf("%ld %d has taken a his right fork\n", get_time(ph->init_time), ph->id);
-	printf("%ld %d is eating\n");
+	printf("%ld %d is eating\n", get_time(ph->init_time), ph->id);
 	es_time = get_time(0);
 	while (get_time(0) - es_time < ph->t_eat)
 		usleep(75);

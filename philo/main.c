@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 06:56:38 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/22 09:02:02 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/22 09:28:23 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,23 @@ int main(int ac, char **av)
 {
 	t_arg	*args;
 	t_cmp	*comp;
-	int		i;
+	// int		i;
 
 	args = check_get_args(ac, av);
 	if (!args)
 		return (1);
-	printf("Executing...\n");
 	comp = launch_philos(args);
 	if (!comp)
 		return (1);
-	i = 0;
-	while (1)
-	{
-		if (get_time(0) - comp->philos[i]->last_eat < comp->philos[i]->t_die)
-		{
-			printf("%ld %d has died\n", get_time(comp->philos[i]->init_time),\
-			comp->philos[i]->id);
-			return (1);
-		}
-	}	
+	// i = 0;
+	// while (1)
+	// {
+	// 	if (get_time(0) - comp->philos[i]->last_eat < comp->philos[i]->t_die)
+	// 	{
+	// 		printf("%ld %d has died\n", get_time(comp->philos[i]->init_time),\
+	// 		comp->philos[i]->id);
+	// 		return (1);
+	// 	}
+	// }	
 	return (0);
 }

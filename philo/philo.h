@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 06:56:58 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/21 17:12:58 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/22 10:10:56 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,17 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <pthread.h>
+
+#include <stdio.h>
+
+#define KNRM  "\x1B[0m"
+#define KRED  "\x1B[31m"
+#define KGRN  "\x1B[32m"
+#define KYEL  "\x1B[33m"
+#define KBLU  "\x1B[34m"
+#define KMAG  "\x1B[35m"
+#define KCYN  "\x1B[36m"
+#define KWHT  "\x1B[37m"
 
 typedef struct timeval t_tval;  // number of i's right neighbor
 typedef pthread_mutex_t	t_mutex;
@@ -52,13 +63,13 @@ typedef struct s_cmp
 
 typedef struct timeval	t_time;
 
+long		get_time(long curr);
 void		*set_up_routines(void	*arg);
 void		*pthr_fail(void);
 int			is_integer(char	*s);
 t_arg		*check_get_args(int ac, char **av);
 int			ft_atoi(const char *str);
 void		*malloc_fail(void);
-long		get_time(long curr);
-t_cmp	*launch_philos(t_arg *args);
+t_cmp		*launch_philos(t_arg *args);
 
 #endif
