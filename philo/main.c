@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 06:56:38 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/22 12:25:05 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/22 12:31:59 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int main(int ac, char **av)
 		{
 			if (get_time(0) - comp->philos[i]->last_eat > comp->philos[i]->t_die)
 			{
-				printf("%ld %d has  died\n", get_time(comp->philos[i]->init_time),\
+				printf("%ld %d has   died\n", get_time(comp->philos[i]->init_time),\
 				comp->philos[i]->id);
 				return (1);
 			}
