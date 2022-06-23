@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 06:56:58 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/22 11:05:43 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/23 12:43:29 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,12 @@
 
 #include <stdio.h>
 
-#define KNRM  "\x1B[0m"
-#define KRED  "\x1B[31m"
-#define KGRN  "\x1B[32m"
-#define KYEL  "\x1B[33m"
-#define KBLU  "\x1B[34m"
-#define KMAG  "\x1B[35m"
-#define KCYN  "\x1B[36m"
-#define KWHT  "\x1B[37m"
-
 typedef struct timeval t_tval;  // number of i's right neighbor
 typedef pthread_mutex_t	t_mutex;
+typedef struct timeval	t_time;
 typedef struct s_arg
 {
-	int	philo;
+	int	num_ph;
 	int t_die;
 	int	t_eat;
 	int	t_sleep;
@@ -53,6 +45,7 @@ typedef struct s_philo
 	int		ts_eat;
 	long	last_eat;
 	t_mutex	*forks;
+	t_mutex	*lock_write;
 }				t_philo;
 
 typedef struct s_cmp
@@ -61,7 +54,6 @@ typedef struct s_cmp
 	t_philo		**philos;
 }				t_cmp;
 
-typedef struct timeval	t_time;
 
 long		get_time(long curr);
 void		*set_up_routines(void	*arg);
@@ -71,5 +63,7 @@ t_arg		*check_get_args(int ac, char **av);
 int			ft_atoi(const char *str);
 void		*malloc_fail(void);
 t_cmp		*launch_philos(t_arg *args);
+size_t		ft_strlen(char *s);
+void		lock_print(char *s, long time, int id, t_mutex *lock);
 
 #endif

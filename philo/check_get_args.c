@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 06:52:21 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/19 18:18:22 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/23 12:30:29 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,20 @@ int	check_integer(int ac, char **av)
 	}
 	return (0);
 }
+
+size_t	check_empty_str(int ac, char **av)
+{
+	int	i;
+
+	i = 0;
+	while (++i < ac )
+		if (!ft_strlen(av[i]))
+		{
+			printf("EMPTY ARG ❌\n");
+			return (1);
+		}
+	return (0);
+}
 /*
 	To-do:
 	- protecting malloc by return value rather than using exit
@@ -66,12 +80,14 @@ t_arg	*check_get_args(int ac, char **av)
 {
 	t_arg	*args;
 	
-	if (verif_argnum(ac) || check_integer(ac, av))
+	if (verif_argnum(ac) ||\
+	 check_integer(ac, av) ||\
+	 check_empty_str(ac, av))
 		return (0);
 	args = malloc(sizeof(t_arg));
 	if (!args)
 		return ((t_arg *)malloc_fail());
-	args->philo = ft_atoi(av[1]);
+	args->num_ph = ft_atoi(av[1]);
 	args->t_die = ft_atoi(av[2]);
 	args->t_eat = ft_atoi(av[3]);
 	args->t_sleep = ft_atoi(av[4]);

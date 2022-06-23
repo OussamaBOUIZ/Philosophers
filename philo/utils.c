@@ -1,49 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/14 11:04:02 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/19 19:15:08 by obouizga         ###   ########.fr       */
+/*   Created: 2022/06/23 09:59:35 by obouizga          #+#    #+#             */
+/*   Updated: 2022/06/23 11:42:36 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*my_turn(void *arg)
+size_t	ft_strlen(char *s)
 {
-	int	i;
+	size_t	i;
 
-	(void)arg;
-	i = -1;
-	while (1)
-	{
-		sleep(1);
-		printf("My turn\n");
-	} 
-	return (NULL);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
 
-void	*your_turn(void *arg)
+void	lock_print(char *s, long time, int id, t_mutex *lock)
 {
-	int	i;
-
-	(void)arg;
-	i = -1;
-	while (++i < 5)
-	{
-		sleep(1);
-		printf("Your turn\n");
-	}
-	return (NULL);
-}
-
-int main(void)
-{	
-	pthread_t thread;
-	pthread_create(&thread, NULL, my_turn, NULL);
-	your_turn(NULL);
-	return (0);	
+	pthread_mutex_lock(lock);
+	printf("%ld %i %s\n", time, id, s);
+	pthread_mutex_unlock(lock);
 }
