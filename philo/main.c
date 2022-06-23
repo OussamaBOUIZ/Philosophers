@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 06:56:38 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/23 12:53:00 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/23 12:54:20 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int 	check_die(t_cmp	*comp, t_arg *args)
 	{
 		if ( get_time(0) - comp->philos[i]->last_eat > comp->philos[i]->t_die)
 		{
-			lock_print("has died", get_time(comp->philos[i]->init_time),\
+			lock_print("has  died", get_time(comp->philos[i]->init_time),\
 			comp->philos[i]->id, comp->philos[i]->lock_write);
 			return (1);
 		}
