@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 06:56:58 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/23 12:43:29 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/23 18:07:03 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,6 @@ int			ft_atoi(const char *str);
 void		*malloc_fail(void);
 t_cmp		*launch_philos(t_arg *args);
 size_t		ft_strlen(char *s);
-void		lock_print(char *s, long time, int id, t_mutex *lock);
+void		lock_print(char *s, long time, int id, t_mutex *lock, int l_u);
 
 #endif

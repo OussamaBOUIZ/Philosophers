@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 06:56:38 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/23 12:54:20 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/23 18:40:31 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,37 @@
 		◦ time_in_ms X is sleeping
 		◦ time_in_ms X is thinking
 		◦ time_in_ms X died	
-*/	
+
+	int 	check_die(t_cmp	*comp, t_arg *args, int m)
+	{
+		int	i;
+
+		i = 0;
+		while (i < args->num_ph)
+		{
+			if (m)
+			{
+				if (get_time(0) - comp->philos[i]->last_eat > comp->philos[i]->t_die )
+				{
+					lock_print("has  died", get_time(comp->philos[i]->init_time),\
+					comp->philos[i]->id, comp->philos[i]->lock_write);
+					return (1);
+				}
+			}
+			else
+			{
+				if (get_time(0) - comp->philos[i]->last_eat > comp->philos[i]->t_die )
+				{
+					lock_print("has  died", get_time(comp->philos[i]->init_time),\
+					comp->philos[i]->id, comp->philos[i]->lock_write);
+					return (1);
+				}
+			}
+			i++;
+		}
+		return (0);
+	}
+*/
 
 // I SHOULD HANDLE THE OPTIONAL ARGUMENT RIGHT BELOW
 int 	check_die(t_cmp	*comp, t_arg *args)
@@ -36,30 +66,62 @@ int 	check_die(t_cmp	*comp, t_arg *args)
 	i = 0;
 	while (i < args->num_ph)
 	{
-		if ( get_time(0) - comp->philos[i]->last_eat > comp->philos[i]->t_die)
+		if (get_time(0) - comp->philos[i]->last_eat >= comp->philos[i]->t_die )
 		{
-			lock_print("has  died", get_time(comp->philos[i]->init_time),\
-			comp->philos[i]->id, comp->philos[i]->lock_write);
+			lock_print("has died", get_time(comp->philos[i]->init_time),\
+			comp->philos[i]->id, comp->philos[i]->lock_write, 'l');
 			return (1);
 		}
+		// usleep(500);
 		i++;
-	}	
+	}
 	return (0);
 }
+
+//IF ALL PHILOS HAVE EATEN THE NUMBER OF TIME THEY SHOULD THIS FUNCTION RETURNS 1; 
+int	check_nums_time_toeat(t_cmp *comp, t_arg *args)
+{
+	int	i;
+
+	i = 0;
+	while (i < args->num_ph)
+	{
+		if (comp->philos[i]->ts_eat < args->ts_eat)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	program_finish(t_cmp *cmp, t_arg *args, int(*times_to_eat_check)(t_cmp *, t_arg *));
+// int	program_finish(t_cmp *comp, t_arg *args)
+// {
+// 	while (1)
+// 	{
+// 		check_die(comp, args);
+// 		if (args->ts_eat != -1)
+// 			if (check_nums_time_toeat(comp, args))
+// 			{
+				
+// 			}
+// 				return (1);
+// 		usleep (500);
+// 	}
+// 	return (0);
+// }
 
 int main(int ac, char **av)
 {
 	t_arg	*args;
 	t_cmp	*comp;
-
+	int		m;
+	
+	m = -1;
 	args = check_get_args(ac, av);
 	if (!args)
 		return (1);
 	comp = launch_philos(args);
 	if (!comp)
 		return (1);
-	while (1)
-		if (check_die(comp, args))
-			return (1);
 	return (0);
 }
