@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 06:52:21 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/23 12:30:29 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/24 11:58:50 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,15 @@ int	check_integer(int ac, char **av)
 	return (0);
 }
 
-size_t	check_empty_str(int ac, char **av)
+size_t	check_zero_str_num(int ac, char **av)
 {
 	int	i;
 
+	if (!ft_atoi(av[1]))
+	{
+		printf("ZERO PHILOS ❌\n");
+		return (1);
+	}
 	i = 0;
 	while (++i < ac )
 		if (!ft_strlen(av[i]))
@@ -82,7 +87,7 @@ t_arg	*check_get_args(int ac, char **av)
 	
 	if (verif_argnum(ac) ||\
 	 check_integer(ac, av) ||\
-	 check_empty_str(ac, av))
+	 check_zero_str_num(ac, av))
 		return (0);
 	args = malloc(sizeof(t_arg));
 	if (!args)

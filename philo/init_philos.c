@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:14:02 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/24 11:36:14 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/24 12:10:40 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ int	create_philos(t_arg *arg, t_cmp *comp, int m)
 	{
 		if (i % 2 == m)
 		{
-			if (pthread_create(&comp->threads[i], NULL, set_up_routines, (void *)comp->philos[i]))
-				return (1);
 			comp->philos[i]->init_time = get_time(0);
 			comp->philos[i]->last_eat = get_time(0);
+			if (pthread_create(&comp->threads[i], NULL, set_up_routines, (void *)comp->philos[i]))
+				return (1);
 			if (usleep(50))
 				return (1);
 		}
