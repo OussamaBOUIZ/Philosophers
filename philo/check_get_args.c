@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 06:52:21 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/24 11:58:50 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/24 16:15:25 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,14 @@ t_arg	*check_get_args(int ac, char **av)
 	args->t_eat = ft_atoi(av[3]);
 	args->t_sleep = ft_atoi(av[4]);
 	if (ac == 6)
+	{
 		args->ts_eat = ft_atoi(av[5]);
+		if (!args->ts_eat)
+		{
+			printf("OPTIONAL ARG = 0 : PHILOS WOULD NEVER EAT ❌\n");
+			return (0);
+		}
+	}
 	else
 		args->ts_eat = -1;
 	return (args);

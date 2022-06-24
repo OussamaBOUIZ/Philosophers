@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 06:56:38 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/24 11:34:14 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/24 16:30:34 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,33 +57,25 @@ int	check_nums_time_toeat(t_cmp *comp, t_arg *args)
 	while (i < args->num_ph)
 	{
 		if (comp->philos[i]->ts_eat < args->ts_eat)
+		{
+			lock_print("has died", get_time(comp->philos[i]->init_time),\
+			comp->philos[i]->id, comp->philos[i]->lock_write, 0);
 			return (0);
+		}
 		i++;
 	}
 	return (1);
 }
-
-// int	program_finish(t_cmp *cmp, t_arg *args, int(*times_to_eat_check)(t_cmp *, t_arg *))
-// {
-// 	while (1)
-// 	{
-// 		if (check_die(cmp, args))
-// 			return (1);
-// 		if (times_to_eat_check)
-// 			if (check_nums_time_toeat(cmp, args))
-// 				return (1);
-// 		usleep(500);
-// 	}
-// 	return (0);
-// }
 
 int	program_finish(t_cmp *cmp, t_arg *args, int(*times_to_eat_check)(t_cmp *, t_arg *))
 {
 	if (times_to_eat_check)
 	{
 		while (1)
-			if (check_die(cmp, args) || check_nums_time_toeat(cmp, args))
+		{
+			if (check_die(cmp, args) || (times_to_eat_check)(cmp, args))
 				return (1);
+		}
 	}
 	else
 	{
