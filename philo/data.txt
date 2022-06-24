@@ -1,0 +1,58 @@
+
+/*
+	seperating the protection of malloc and pthread in some lines above
+	comp
+	{
+		[pthread_t_1, pthread_t_2, .. n]
+		[
+			{
+				int		n_philos;
+				long	init_time;
+				int		id;
+				int		t_die;
+				int		t_eat;
+				int		t_sleep;
+				int		ts_eat;
+				long	last_eat;
+				t_mutex	*forks;
+				t_mutex	lock_write;
+			},
+			{
+				int		n_philos;
+				long	init_time;
+				int		id;
+				int		t_die;
+				int		t_eat;
+				int		t_sleep;
+				int		ts_eat;
+				long	last_eat;
+				t_mutex	*forks;
+				t_mutex	lock_write;
+			},
+			{
+				int		n_philos;
+				long	init_time;
+				int		id;
+				int		t_die;
+				int		t_eat;
+				int		t_sleep;
+				int		ts_eat;
+				long	last_eat;
+				t_mutex	*forks;
+				t_mutex	lock_write;
+			},
+			{
+				int		n_philos;
+				long	init_time;
+				int		id;
+				int		t_die;
+				int		t_eat;
+				int		t_sleep;
+				int		ts_eat;
+				long	last_eat;
+				t_mutex	*forks;
+				t_mutex	lock_write;
+			},
+		]
+	}
+*/

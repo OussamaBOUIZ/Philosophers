@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:14:02 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/24 12:10:40 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/25 00:20:08 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,18 @@ t_mutex	*create_forks(t_arg	*args)
 t_philo	**get_philos_prop(t_arg	*args, t_mutex *forks, t_mutex *lock_write)
 {
 	t_philo	**phv;
-	long	init_time;
 	int		i;
-
 
 	phv = malloc(sizeof(t_philo) * args->num_ph);
 	if (!phv)
-			return ((t_philo **)malloc_fail());
-	i = 0;
-	while (i < args->num_ph)
+		return ((t_philo **)malloc_fail());
+	i = -1;
+	while (++i < args->num_ph)
 	{
 		phv[i] = malloc(sizeof(t_philo));
 		if (!phv[i])
 			return ((t_philo **)malloc_fail());
-		init_time = get_time(0);
 		phv[i]->n_philos = args->num_ph;
-		// phv[i]->init_time = init_time;
-		// phv[i]->last_eat = init_time;
 		phv[i]->id = i + 1;
 		phv[i]->t_die = args->t_die;
 		phv[i]->t_eat = args->t_eat;
@@ -54,10 +49,11 @@ t_philo	**get_philos_prop(t_arg	*args, t_mutex *forks, t_mutex *lock_write)
 		phv[i]->ts_eat = args->ts_eat;
 		phv[i]->forks = forks;
 		phv[i]->lock_write = lock_write;
-		i++;
+		phv[i]->ts_eat = -1;
+		if (args->ts_eat != -1)
+			phv[i]->ts_eat = 0;
 	}
 	return (phv);
-	// This function returns an array of pointers to philo struct
 }
 
 int	create_philos(t_arg *arg, t_cmp *comp, int m)
@@ -71,11 +67,11 @@ int	create_philos(t_arg *arg, t_cmp *comp, int m)
 		{
 			comp->philos[i]->init_time = get_time(0);
 			comp->philos[i]->last_eat = get_time(0);
-			if (pthread_create(&comp->threads[i], NULL, set_up_routines, (void *)comp->philos[i]))
-				return (1);
-			if (usleep(50))
+			if (pthread_create(&comp->threads[i], NULL, set_up_routines, \
+			(void *)comp->philos[i]))
 				return (1);
 		}
+		usleep(50);
 		i++;
 	}
 	return (0);
@@ -91,7 +87,7 @@ t_cmp	*launch_philos(t_arg *args)
 	if (!comp)
 		return ((t_cmp *)malloc_fail());
 	comp->threads = malloc(sizeof(pthread_t) * args->num_ph);
-	forks =	create_forks(args);
+	forks = create_forks(args);
 	if (!comp->threads || !forks)
 		return ((t_cmp *)malloc_fail());
 	if (pthread_mutex_init(&lock_write, NULL))
@@ -104,62 +100,3 @@ t_cmp	*launch_philos(t_arg *args)
 		return ((t_cmp *)pthr_fail());
 	return (comp);
 }
-
-
-/*
-	seperating the protection of malloc and pthread in some lines above
-	comp
-	{
-		[pthread_t_1, pthread_t_2, .. n]
-		[
-			{
-				int		n_philos;
-				long	init_time;
-				int		id;
-				int		t_die;
-				int		t_eat;
-				int		t_sleep;
-				int		ts_eat;
-				long	last_eat;
-				t_mutex	*forks;
-				t_mutex	lock_write;
-			},
-			{
-				int		n_philos;
-				long	init_time;
-				int		id;
-				int		t_die;
-				int		t_eat;
-				int		t_sleep;
-				int		ts_eat;
-				long	last_eat;
-				t_mutex	*forks;
-				t_mutex	lock_write;
-			},
-			{
-				int		n_philos;
-				long	init_time;
-				int		id;
-				int		t_die;
-				int		t_eat;
-				int		t_sleep;
-				int		ts_eat;
-				long	last_eat;
-				t_mutex	*forks;
-				t_mutex	lock_write;
-			},
-			{
-				int		n_philos;
-				long	init_time;
-				int		id;
-				int		t_die;
-				int		t_eat;
-				int		t_sleep;
-				int		ts_eat;
-				long	last_eat;
-				t_mutex	*forks;
-				t_mutex	lock_write;
-			},
-		]
-	}
-*/

@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 08:05:23 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/13 08:05:54 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/25 00:13:25 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	ft_atoi(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{	
 		num = num * 10 + str[i] - '0';
-		
 		i++;
 	}
 	return (num * sign);

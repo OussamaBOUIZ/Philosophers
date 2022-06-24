@@ -3,6 +3,7 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 CC = cc
 FTH = -fsanitize=thread
+FS = -fsanitize=address
 FUNCTIONS = main.c  init_philos.c check_get_args.c is_integer.c ft_atoi.c sys_err.c\
 			time.c set_up_routines.c utils.c
 
