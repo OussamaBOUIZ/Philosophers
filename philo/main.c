@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 06:56:38 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/23 18:40:31 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/24 11:34:14 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,36 +26,6 @@
 		◦ time_in_ms X is sleeping
 		◦ time_in_ms X is thinking
 		◦ time_in_ms X died	
-
-	int 	check_die(t_cmp	*comp, t_arg *args, int m)
-	{
-		int	i;
-
-		i = 0;
-		while (i < args->num_ph)
-		{
-			if (m)
-			{
-				if (get_time(0) - comp->philos[i]->last_eat > comp->philos[i]->t_die )
-				{
-					lock_print("has  died", get_time(comp->philos[i]->init_time),\
-					comp->philos[i]->id, comp->philos[i]->lock_write);
-					return (1);
-				}
-			}
-			else
-			{
-				if (get_time(0) - comp->philos[i]->last_eat > comp->philos[i]->t_die )
-				{
-					lock_print("has  died", get_time(comp->philos[i]->init_time),\
-					comp->philos[i]->id, comp->philos[i]->lock_write);
-					return (1);
-				}
-			}
-			i++;
-		}
-		return (0);
-	}
 */
 
 // I SHOULD HANDLE THE OPTIONAL ARGUMENT RIGHT BELOW
@@ -64,15 +34,15 @@ int 	check_die(t_cmp	*comp, t_arg *args)
 	int	i;
 
 	i = 0;
+	usleep(500);
 	while (i < args->num_ph)
 	{
 		if (get_time(0) - comp->philos[i]->last_eat >= comp->philos[i]->t_die )
 		{
 			lock_print("has died", get_time(comp->philos[i]->init_time),\
-			comp->philos[i]->id, comp->philos[i]->lock_write, 'l');
+			comp->philos[i]->id, comp->philos[i]->lock_write, 0);
 			return (1);
 		}
-		// usleep(500);
 		i++;
 	}
 	return (0);
@@ -93,22 +63,36 @@ int	check_nums_time_toeat(t_cmp *comp, t_arg *args)
 	return (1);
 }
 
-int	program_finish(t_cmp *cmp, t_arg *args, int(*times_to_eat_check)(t_cmp *, t_arg *));
-// int	program_finish(t_cmp *comp, t_arg *args)
+// int	program_finish(t_cmp *cmp, t_arg *args, int(*times_to_eat_check)(t_cmp *, t_arg *))
 // {
 // 	while (1)
 // 	{
-// 		check_die(comp, args);
-// 		if (args->ts_eat != -1)
-// 			if (check_nums_time_toeat(comp, args))
-// 			{
-				
-// 			}
+// 		if (check_die(cmp, args))
+// 			return (1);
+// 		if (times_to_eat_check)
+// 			if (check_nums_time_toeat(cmp, args))
 // 				return (1);
-// 		usleep (500);
+// 		usleep(500);
 // 	}
 // 	return (0);
 // }
+
+int	program_finish(t_cmp *cmp, t_arg *args, int(*times_to_eat_check)(t_cmp *, t_arg *))
+{
+	if (times_to_eat_check)
+	{
+		while (1)
+			if (check_die(cmp, args) || check_nums_time_toeat(cmp, args))
+				return (1);
+	}
+	else
+	{
+		while (1)
+			if (check_die(cmp, args))
+				return (1);
+	}
+	return (0);
+}
 
 int main(int ac, char **av)
 {
@@ -123,5 +107,9 @@ int main(int ac, char **av)
 	comp = launch_philos(args);
 	if (!comp)
 		return (1);
+	if (args->ts_eat != -1)
+		program_finish(comp, args, check_nums_time_toeat);
+	else
+		program_finish(comp, args, NULL);
 	return (0);
 }

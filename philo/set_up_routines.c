@@ -72,14 +72,14 @@ void	eating_routine(t_philo *ph)
 	left = ph->id - 1;
 	right = (ph->id) % ph->n_philos;
 	pthread_mutex_lock(&ph->forks[left]);
-	lock_print("has taken his left fork", get_time(ph->init_time), ph->id, ph->lock_write);
+	lock_print("has taken his left fork", get_time(ph->init_time), ph->id, ph->lock_write, 1);
 	pthread_mutex_lock(&ph->forks[right]);
-	lock_print("has taken his right fork", get_time(ph->init_time), ph->id, ph->lock_write);
-	lock_print("is eating", get_time(ph->init_time), ph->id, ph->lock_write);
+	lock_print("has taken his right fork", get_time(ph->init_time), ph->id, ph->lock_write, 1);
+	lock_print("is eating", get_time(ph->init_time), ph->id, ph->lock_write,1);
 	es_time = get_time(0);
 	ph->last_eat = es_time;
 	while (get_time(0) - es_time < ph->t_eat)
-		usleep(50);
+		usleep(250);
 	pthread_mutex_unlock(&ph->forks[left]);
 	pthread_mutex_unlock(&ph->forks[right]);
 }
@@ -89,16 +89,16 @@ void	sleeping_routine(t_philo *ph)
 {
 	long	ss_time;
 
-	lock_print("is sleeping", get_time(ph->init_time), ph->id, ph->lock_write);
+	lock_print("is sleeping", get_time(ph->init_time), ph->id, ph->lock_write, 1);
 	ss_time = get_time(0);
 	while (get_time(0) - ss_time < ph->t_sleep)
-		usleep(50);
+		usleep(250);
 }
 
 //TESTING
 void	thinking_routine(t_philo *ph)
 {
-	lock_print("is thinking", get_time(ph->init_time), ph->id, ph->lock_write);
+	lock_print("is thinking", get_time(ph->init_time), ph->id, ph->lock_write, 1);
 }
 
 void	*set_up_routines(void	*arg)
