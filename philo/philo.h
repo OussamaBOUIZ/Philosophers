@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 06:56:58 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/25 11:21:43 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/25 15:11:20 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct timeval	t_time;
 typedef struct s_arg
 {
 	int	num_ph;
-	int t_die;
+	int	t_die;
 	int	t_eat;
 	int	t_sleep;
 	int	ts_eat;

@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 06:56:38 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/25 11:34:15 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/25 22:49:56 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,7 @@ int	main(int ac, char **av)
 {
 	t_arg	*args;
 	t_cmp	*comp;
-	int		m;
 
-	m = -1;
 	args = check_get_args(ac, av);
 	if (!args)
 		return (1);

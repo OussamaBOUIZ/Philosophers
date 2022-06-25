@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 16:35:36 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/25 12:00:54 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/25 22:51:27 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	eating_routine(t_philo *ph)
 	left = ph->id - 1;
 	right = (ph->id) % ph->n_philos;
 	pthread_mutex_lock(&ph->forks[left]);
-	lock_print("has taken his left fork", get_time(ph->init_time), ph->id, \
+	lock_print("has taken a fork", get_time(ph->init_time), ph->id, \
 	ph->lock_write);
 	pthread_mutex_lock(&ph->forks[right]);
-	lock_print("has taken his right fork", get_time(ph->init_time), ph->id, \
+	lock_print("has taken a fork", get_time(ph->init_time), ph->id, \
 	ph->lock_write);
 	lock_print("is eating", get_time(ph->init_time), ph->id, ph->lock_write);
 	if (ph->ts_eat != -1)
@@ -32,7 +32,7 @@ void	eating_routine(t_philo *ph)
 	es_time = get_time(0);
 	ph->last_eat = es_time;
 	while (get_time(0) - es_time < ph->t_eat)
-		usleep(250);
+		usleep(200);
 	pthread_mutex_unlock(&ph->forks[left]);
 	pthread_mutex_unlock(&ph->forks[right]);
 }
@@ -44,7 +44,7 @@ void	sleeping_routine(t_philo *ph)
 	lock_print("is sleeping", get_time(ph->init_time), ph->id, ph->lock_write);
 	ss_time = get_time(0);
 	while (get_time(0) - ss_time < ph->t_sleep)
-		usleep(250);
+		usleep(200);
 }
 
 void	thinking_routine(t_philo *ph)
