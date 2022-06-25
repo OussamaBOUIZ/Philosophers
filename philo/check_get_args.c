@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 06:52:21 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/25 00:13:05 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/25 11:26:04 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,8 @@ t_arg	*check_get_args(int ac, char **av)
 {
 	t_arg	*args;
 
-	if (verif_argnum(ac) || \
-	check_integer(ac, av) || \
-	check_zero_str_num(ac, av))
+	if (verif_argnum(ac) || check_integer(ac, av) || \
+	check_zero_str_num(ac, av) || check_range(av, ac))
 		return (0);
 	args = malloc(sizeof(t_arg));
 	if (!args)
