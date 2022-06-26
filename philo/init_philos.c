@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:14:02 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/26 12:29:59 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/26 15:46:58 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ t_mutex	*create_forks(t_arg	*args)
 		if (pthread_mutex_init(&forks[i], NULL))
 			return ((t_mutex *)pthr_fail());
 	return (forks);
+}
+
+void	handle_opt_arg(t_arg *args, t_philo *ph)
+{
+	if (args->ts_eat != -1)
+		ph->ts_eat = 0;
+	else
+		ph->ts_eat = -1;
 }
 
 t_philo	**get_philos_prop(t_arg	*args, t_mutex *forks, t_mutex *lock_write)
@@ -51,9 +59,7 @@ t_philo	**get_philos_prop(t_arg	*args, t_mutex *forks, t_mutex *lock_write)
 		phv[i]->lock_write = lock_write;
 		phv[i]->init_time = get_time(0);
 		phv[i]->last_eat = get_time(0);
-		phv[i]->ts_eat = -1;
-		if (args->ts_eat != -1)
-			phv[i]->ts_eat = 0;
+		handle_opt_arg(args, phv[i]);
 	}
 	return (phv);
 }
@@ -67,12 +73,11 @@ int	create_philos(t_arg *arg, t_cmp *comp, int m)
 	{
 		if (i % 2 == m)
 		{
-			// comp->philos[i]->last_eat = get_time(0);
 			if (pthread_create(&comp->threads[i], NULL, set_up_routines, \
 			(void *)comp->philos[i]))
-					return (1);
+				return (1);
 		}
-		usleep(20);
+		usleep(50);
 		i++;
 	}
 	return (0);

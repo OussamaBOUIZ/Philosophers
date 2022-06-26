@@ -6,13 +6,19 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 11:19:57 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/25 11:25:17 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/26 15:36:40 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	check(const char *str)
+int	out_of_range(void)
+{
+	printf("OUT OF RANGE ❌\n");
+	return (-1);
+}
+
+int	check(const char *str)
 {
 	int					i;
 	unsigned long long	num;
@@ -34,10 +40,7 @@ static int	check(const char *str)
 		num = num * 10 + str[i] - '0';
 		if ((num >= 2147483648 && sign == 1) || \
 		(num > 2147483648 && sign == -1))
-		{
-			printf("OUT OF RANGE ❌\n");
-			return (-1);
-		}
+			return (out_of_range());
 		i++;
 	}
 	return (num * sign);
