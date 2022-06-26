@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 06:52:21 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/25 11:26:04 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/26 16:36:20 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	check_integer(int ac, char **av)
 	{
 		if (!is_integer(av[i]))
 		{
-			printf("ARG NOT INTEGER ❌\n");
+			printf("INVALID ARGUMENT ❌\n");
 			return (1);
 		}
 		i++;

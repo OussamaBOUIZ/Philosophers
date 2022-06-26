@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 06:56:58 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/26 12:39:59 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/26 16:27:18 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,6 @@ void		lock_print_death(char *s, long time, int id, t_mutex *lock);
 int			check_range(char **nums, int n);
 void		ft_usleep(long time_to_eat);
 #endif
-
-
-
 /*
 		lock_print("has taken a fork", get_time(ph->init_time), ph->id, \
 	ph->lock_write);
