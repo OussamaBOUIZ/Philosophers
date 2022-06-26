@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 06:56:58 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/26 16:27:18 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/26 17:59:41 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <pthread.h>
+# include <stdio.h>
 
-#include <stdio.h>
-
-typedef struct timeval t_tval;  // number of i's right neighbor
+typedef struct timeval	t_tval;
 typedef pthread_mutex_t	t_mutex;
 typedef struct timeval	t_time;
+
 typedef struct s_arg
 {
 	int	num_ph;
@@ -70,19 +70,3 @@ void		lock_print_death(char *s, long time, int id, t_mutex *lock);
 int			check_range(char **nums, int n);
 void		ft_usleep(long time_to_eat);
 #endif
-/*
-		lock_print("has taken a fork", get_time(ph->init_time), ph->id, \
-	ph->lock_write);
-	pthread_mutex_lock(&ph->forks[right]);
-	lock_print("has taken a fork", get_time(ph->init_time), ph->id, \
-	ph->lock_write);
-	lock_print("is eating", get_time(ph->init_time), ph->id, ph->lock_write);
-	if (ph->ts_eat != -1)
-		ph->ts_eat++;
-	es_time = get_time(0);
-	ph->last_eat = es_time;
-	while (get_time(0) - es_time < ph->t_eat)
-		usleep(200);
-	pthread_mutex_unlock(&ph->forks[left]);
-	pthread_mutex_unlock(&ph->forks[right]);
-*/
