@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 09:59:35 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/25 22:20:17 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/26 12:38:17 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,19 @@ size_t	ft_strlen(char *s)
 		i++;
 	return (i);
 }
+
+// void	lock_print(char *s, t_philo *ph)
+// {
+// 	pthread_mutex_lock(ph->lock_write);
+// 	printf("%ld ms %i %s\n", get_time(ph->init_time), ph->id, s);
+// 	pthread_mutex_unlock(ph->lock_write);
+// }
+
+// void	lock_print_death(char *s, t_philo *ph)
+// {
+// 	pthread_mutex_lock(ph->lock_write);
+// 	printf("%ld ms %i %s\n", get_time(ph->init_time), ph->id, s);
+// }
 
 void	lock_print(char *s, long time, int id, t_mutex *lock)
 {

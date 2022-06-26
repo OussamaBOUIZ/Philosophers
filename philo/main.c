@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 06:56:38 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/25 22:49:56 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/26 13:03:28 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,18 @@ int	program_finish(t_cmp *cmp, t_arg *args, int (*f)(t_cmp *, t_arg *))
 	{
 		while (1)
 		{
-			usleep(500);
 			if ((f)(cmp, args) || check_die(cmp, args))
 				return (1);
+			usleep(500);
 		}
 	}
 	else
 	{
 		while (1)
 		{
-			usleep(500);
 			if (check_die(cmp, args))
 				return (1);
+			usleep(500);
 		}
 	}
 	return (0);

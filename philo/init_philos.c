@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:14:02 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/25 22:25:41 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/26 12:29:59 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ t_philo	**get_philos_prop(t_arg	*args, t_mutex *forks, t_mutex *lock_write)
 		phv[i]->ts_eat = args->ts_eat;
 		phv[i]->forks = forks;
 		phv[i]->lock_write = lock_write;
+		phv[i]->init_time = get_time(0);
+		phv[i]->last_eat = get_time(0);
 		phv[i]->ts_eat = -1;
 		if (args->ts_eat != -1)
 			phv[i]->ts_eat = 0;
@@ -65,13 +67,12 @@ int	create_philos(t_arg *arg, t_cmp *comp, int m)
 	{
 		if (i % 2 == m)
 		{
-			comp->philos[i]->init_time = get_time(0);
-			comp->philos[i]->last_eat = get_time(0);
+			// comp->philos[i]->last_eat = get_time(0);
 			if (pthread_create(&comp->threads[i], NULL, set_up_routines, \
 			(void *)comp->philos[i]))
-				return (1);
+					return (1);
 		}
-		usleep(50);
+		usleep(20);
 		i++;
 	}
 	return (0);
@@ -81,8 +82,9 @@ t_cmp	*launch_philos(t_arg *args)
 {
 	t_cmp	*comp;
 	t_mutex	*forks;
-	t_mutex	lock_write;
+	t_mutex	*lock_write;
 
+	lock_write = malloc(sizeof(t_mutex));
 	comp = malloc(sizeof(t_cmp));
 	if (!comp)
 		return ((t_cmp *)malloc_fail());
@@ -90,9 +92,9 @@ t_cmp	*launch_philos(t_arg *args)
 	forks = create_forks(args);
 	if (!comp->threads || !forks)
 		return ((t_cmp *)malloc_fail());
-	if (pthread_mutex_init(&lock_write, NULL))
+	if (pthread_mutex_init(lock_write, NULL))
 		return ((t_cmp *)pthr_fail());
-	comp->philos = get_philos_prop(args, forks, &lock_write);
+	comp->philos = get_philos_prop(args, forks, lock_write);
 	if (!comp->philos)
 		return ((t_cmp *)malloc_fail());
 	if (create_philos(args, comp, 1) || \
