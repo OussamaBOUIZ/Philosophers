@@ -4,11 +4,7 @@ RM = rm -rf
 CC = cc
 FTH = -fsanitize=thread
 FS = -fsanitize=address
-FUNCTIONS = main.c  check_range.c check_get_args.c init_philos.c  is_integer.c ft_atoi.c sys_err.c\
-			time.c set_up_routines.c utils.c return_mess.c return_mess_2.c 
-
-
-
+FUNCTIONS = main.c 
 OBJECTS = $(FUNCTIONS:.c=.o)
 
 

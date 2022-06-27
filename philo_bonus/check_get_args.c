@@ -6,11 +6,11 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 06:52:21 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/27 15:50:58 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/27 17:19:53 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 int	verif_argnum(int ac)
 {
