@@ -6,8 +6,18 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:13:27 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/27 17:20:01 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/28 15:29:37 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
+
+int main(int ac ,char **av)
+{
+	t_arg	*args;
+
+	args = check_get_args(ac, av);
+	if (!args)
+		return (1);
+	
+}
