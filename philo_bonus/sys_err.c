@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sys_err.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/27 17:13:27 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/29 15:21:44 by obouizga         ###   ########.fr       */
+/*   Created: 2022/06/13 08:07:26 by obouizga          #+#    #+#             */
+/*   Updated: 2022/06/29 16:36:27 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_bonus.h"
+#include "philo.h"
 
-int main(int ac ,char **av)
+void	malloc_fail(void)
 {
-	t_arg	*args;
-	t_cmp	*component;
-
-	args = check_get_args(ac, av);
-	if (!args)
-		return (1);
-	component = launch_procs(args);
-	if (!component)
-		return (1);
-	return (0);
+	printf("Malloc failed\n");
+	exit(EXIT_FAILURE);
 }
+
+void	semaph_fail(void)
+{
+	printf("SEMAPHORE FAILED\n");
+	exit(EXIT_FAILURE);
+}
+
+void	fork_fail(void)
+{
+	printf("FORK FAILED\n");
+	exit(EXIT_FAILURE);
+}
+

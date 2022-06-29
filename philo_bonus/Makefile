@@ -4,7 +4,8 @@ RM = rm -rf
 CC = cc
 FTH = -fsanitize=thread
 FS = -fsanitize=address
-FUNCTIONS = main.c 
+FUNCTIONS = main.c  check_get_args.c init_proc.c return_mess.c return_mess_2.c \
+			sys_err.c
 OBJECTS = $(FUNCTIONS:.c=.o)
 
 

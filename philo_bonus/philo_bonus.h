@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 06:56:58 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/28 15:31:49 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/29 16:19:35 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <stdio.h>
+# include <semaphore.h>
 
 typedef struct timeval	t_tval;
 typedef pthread_mutex_t	t_mutex;
@@ -36,21 +37,23 @@ typedef struct s_arg
 
 typedef struct s_philo
 {
-	int		n_philos;
-	long	init_time;
-	int		id;
-	int		t_die;
-	int		t_eat;
-	int		t_sleep;
-	int		ts_eat;
-	long	last_eat;
-	t_mutex	*lock_write;
+	unsigned int	n_philos;
+	long			init_time;
+	int				id;
+	int				t_die;
+	int				t_eat;
+	int				t_sleep;
+	int				ts_eat;
+	long			last_eat;
+	sem_t			*semaph;
+	t_mutex			*lock_write;
 }				t_philo;
 
 typedef struct s_cmp
 {
-	pthread_t	*threads;
-	t_philo		**philos;
+	pid_t	*pids;
+	t_philo	**philos;
+	sem_t	*semaph;
 }				t_cmp;
 
 int			incomplete_arguments(void);
@@ -66,7 +69,8 @@ void		*pthr_fail(void);
 int			is_integer(char	*s);
 t_arg		*check_get_args(int ac, char **av);
 int			ft_atoi(const char *str);
-void		*malloc_fail(void);
+void		malloc_fail(void);
+void		semaph_fail(void);
 t_cmp		*launch_philos(t_arg *args);
 size_t		ft_strlen(char *s);
 void		lock_print(char *s, long time, int id, t_mutex *lock);
