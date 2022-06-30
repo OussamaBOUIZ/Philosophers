@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   setup_routines.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/27 17:13:27 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/30 16:59:52 by obouizga         ###   ########.fr       */
+/*   Created: 2022/06/30 17:06:01 by obouizga          #+#    #+#             */
+/*   Updated: 2022/06/30 17:17:25 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-int main(int ac ,char **av)
+void	setup_routines(t_philo *philo)
 {
-	t_arg	*args;
-	t_cmp	*component;
-
-	args = check_get_args(ac, av);
-	if (!args)
-		return (1);
-	component = launch_procs(args);
-	if (!component)
-		return (1);
-	return (0);
+	while (1)
+	{
+		eating_routine(philo);
+		sleeping_routine(philo);
+		thinking_routine(philo);
+	}
 }

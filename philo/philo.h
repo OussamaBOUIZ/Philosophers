@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 06:56:58 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/27 15:58:31 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/30 17:05:18 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int			empty_arg(void);
 int			invalid_timing(void);
 t_arg		*never_eat(void);
 long		get_time(long curr);
-void		*set_up_routines(void	*arg);
+void		set_up_routines(t_cmp *component);
 void		*pthr_fail(void);
 int			is_integer(char	*s);
 t_arg		*check_get_args(int ac, char **av);

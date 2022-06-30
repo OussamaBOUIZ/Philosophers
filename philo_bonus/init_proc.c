@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 15:20:04 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/29 18:35:02 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/06/30 17:08:48 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,18 @@ t_philo **get_philo_prop(t_arg *args, sem_t *semaph)
 	return (phv);
 }
 
-void	create_procs(t_arg *args, t_cmp *comp)
+void	create_procs(int num_ph, t_cmp *comp)
 {
 	int	i;
 
 	i = 0;
-	while (i < args->num_ph)
+	while (i < num_ph)
 	{
 		comp->pids[i] = fork();
 		if (comp->pids[i] == -1)
 			fork_fail();
+		if (!comp->pids[i])
+			set_up_routines(comp->philos[i]);
 		usleep(50);
 		i++;
 	}
@@ -80,6 +82,6 @@ t_cmp	*launch_procs(t_arg *args)
 	comp->philos = get_philos_prop(args, comp->semaph);
 	if (!comp->philos)
 		malloc_fail();
-	create_procs(args, comp);
+	create_procs(args->num_ph, comp);
 	return (comp);
 }
