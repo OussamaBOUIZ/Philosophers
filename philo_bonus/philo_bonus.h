@@ -6,12 +6,12 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 06:56:58 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/29 16:19:35 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/07/31 16:36:35 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define FDF_H
+#ifndef PHILO_BONUS_H
+# define PHILO_BONUS_H
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -56,22 +56,24 @@ typedef struct s_cmp
 	sem_t	*semaph;
 }				t_cmp;
 
-int			incomplete_arguments(void);
-int			extra_arguments(void);
-int			invalid_arguments(void);
-int			zero_philos(void);
-int			empty_arg(void);
-int			invalid_timing(void);
-t_arg		*never_eat(void);
+void		incomplete_arguments(void);
+void		extra_arguments(void);
+void		invalid_arguments(void);
+void		zero_philos(void);
+void		empty_arg(void);
+void		invalid_timing(void);
+void		never_eat(void);
 long		get_time(long curr);
-void		*set_up_routines(void	*arg);
+size_t		ft_strlen(char *s);
+void		setup_routines(t_philo *philo);
 void		*pthr_fail(void);
 int			is_integer(char	*s);
 t_arg		*check_get_args(int ac, char **av);
 int			ft_atoi(const char *str);
 void		malloc_fail(void);
 void		semaph_fail(void);
-t_cmp		*launch_philos(t_arg *args);
+void		fork_fail(void);
+void		launch_procs(t_arg *args);
 size_t		ft_strlen(char *s);
 void		lock_print(char *s, long time, int id, t_mutex *lock);
 void		lock_print_death(char *s, long time, int id, t_mutex *lock);

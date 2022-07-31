@@ -1,6 +1,8 @@
+philo/
 *.dSYM
 a.out
 # *.txt
 t
 t.c
+*.pdf
 .vscode/

@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 15:20:04 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/30 17:08:48 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/07/31 19:00:07 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	handle_opt_arg(t_arg *args, t_philo *ph)
 		ph->ts_eat = -1;
 }
 
-t_philo **get_philo_prop(t_arg *args, sem_t *semaph)
+t_philo **get_philos_prop(t_arg *args, sem_t *semaph)
 {
 	t_philo **phv;
 	int		i;
@@ -59,13 +59,23 @@ void	create_procs(int num_ph, t_cmp *comp)
 		if (comp->pids[i] == -1)
 			fork_fail();
 		if (!comp->pids[i])
-			set_up_routines(comp->philos[i]);
-		usleep(50);
+			setup_routines(comp->philos[i]);
+		if (comp->pids[i])
+			usleep(50);
 		i++;
 	}
 }
 
-t_cmp	*launch_procs(t_arg *args)
+/*
+	*	typedef struct s_cmp
+	*	{
+	*		pid_t	*pids;
+	*		t_philo	**philos;
+	*		sem_t	*semaph;	
+	*	}				t_cmp;
+*/
+
+void	launch_procs(t_arg *args)
 {
 	t_cmp	*comp;
 
@@ -75,13 +85,12 @@ t_cmp	*launch_procs(t_arg *args)
 	comp->pids = malloc(sizeof(pid_t) * args->num_ph);
 	if (!comp->pids)
 		malloc_fail();
-	comp->semaph = sem_open("forks_semaph", O_CREAT | O_EXCL, \
-	S_IRUSR | S_IWUSR, args->num_ph);
-	if (comp->semaph)
+	comp->semaph = sem_open("forks_semaph", O_CREAT | O_EXCL, 0777, args->num_ph);
+	if (comp->semaph == SEM_FAILED)
+	{
+		printf("salam labas\n");
 		semaph_fail();
+	}
 	comp->philos = get_philos_prop(args, comp->semaph);
-	if (!comp->philos)
-		malloc_fail();
 	create_procs(args->num_ph, comp);
-	return (comp);
 }

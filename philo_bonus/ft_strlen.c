@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/27 17:13:27 by obouizga          #+#    #+#             */
-/*   Updated: 2022/07/31 18:36:46 by obouizga         ###   ########.fr       */
+/*   Created: 2022/06/23 09:59:35 by obouizga          #+#    #+#             */
+/*   Updated: 2022/07/31 16:24:53 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-/*
-	* num_of_philos
-	* time_to_die
-	* time_to_eat
-	* time_to_sleep
-	* [number_of_times_each_phil_must_eat]
-*/
-
-int main(int ac ,char **av)
+size_t	ft_strlen(char *s)
 {
-	t_arg	*args;
+	size_t	i;
 
-	args = check_get_args(ac, av);
-	if (!args)
-		return (1);
-	launch_procs(args);
-	return (0);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
+
+// void	lock_print(char *s, long time, int id, t_mutex *lock)
+// {
+// 	pthread_mutex_lock(lock);
+// 	printf("%ld ms %i %s\n", time, id, s);
+// 	pthread_mutex_unlock(lock);
+// }
+
+// void	lock_print_death(char *s, long time, int id, t_mutex *lock)
+// {
+// 	pthread_mutex_lock(lock);
+// 	printf("%ld ms %i %s\n", time, id, s);
+// }

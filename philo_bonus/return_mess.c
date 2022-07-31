@@ -6,38 +6,38 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 15:36:40 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/27 17:19:48 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/07/31 16:22:34 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-int	incomplete_arguments(void)
+void	incomplete_arguments(void)
 {
 	printf("INCOMPLETE ARGUMENTS ❌\n");
-	return (1);
+	exit(EXIT_FAILURE);
 }
 
-int	extra_arguments(void)
+void	extra_arguments(void)
 {
 	printf("EXTRA ARGUMENTS ❌\n");
-	return (1);
+	exit(EXIT_FAILURE);
 }
 
-int	invalid_arguments(void)
+void	invalid_arguments(void)
 {
 	printf("INVALID ARGUMENTS ❌\n");
-	return (1);
+	exit(EXIT_FAILURE);
 }
 
-int	zero_philos(void)
+void	zero_philos(void)
 {
 	printf("ZERO PHILOS ❌\n");
-	return (1);
+	exit(EXIT_FAILURE);
 }
 
-int	empty_arg(void)
+void	empty_arg(void)
 {
 	printf("EMPTY ARGUMENT ❌");
-	return (1);
+	exit(EXIT_FAILURE);
 }

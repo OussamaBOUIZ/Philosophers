@@ -6,11 +6,11 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 08:07:26 by obouizga          #+#    #+#             */
-/*   Updated: 2022/06/29 16:36:27 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/07/31 16:23:39 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 void	malloc_fail(void)
 {
@@ -29,4 +29,3 @@ void	fork_fail(void)
 	printf("FORK FAILED\n");
 	exit(EXIT_FAILURE);
 }
-
