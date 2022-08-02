@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 06:56:58 by obouizga          #+#    #+#             */
-/*   Updated: 2022/07/31 16:36:35 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/08/02 07:41:36 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_philo
 	int				ts_eat;
 	long			last_eat;
 	sem_t			*semaph;
-	t_mutex			*lock_write;
+	sem_t			*w_lock;
 }				t_philo;
 
 typedef struct s_cmp
@@ -73,10 +73,10 @@ int			ft_atoi(const char *str);
 void		malloc_fail(void);
 void		semaph_fail(void);
 void		fork_fail(void);
-void		launch_procs(t_arg *args);
+t_cmp		*launch_procs(t_arg *args);
 size_t		ft_strlen(char *s);
-void		lock_print(char *s, long time, int id, t_mutex *lock);
-void		lock_print_death(char *s, long time, int id, t_mutex *lock);
+void		lock_print(char *s, long time, int id, sem_t *sem);
+void		lock_print_death(char *s, long time, int id, sem_t *sem);
 int			check_range(char **nums, int n);
 void		ft_usleep(long time_to_eat);
 #endif

@@ -5,4 +5,5 @@ a.out
 t
 t.c
 *.pdf
+*.txt
 .vscode/
