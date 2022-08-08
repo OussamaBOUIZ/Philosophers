@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 06:56:58 by obouizga          #+#    #+#             */
-/*   Updated: 2022/08/02 07:41:36 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/08/08 12:05:34 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,9 @@ void		lock_print(char *s, long time, int id, sem_t *sem);
 void		lock_print_death(char *s, long time, int id, sem_t *sem);
 int			check_range(char **nums, int n);
 void		ft_usleep(long time_to_eat);
+void		display_arr(pid_t *pids, int n);
+pid_t		*set_pids(int n);
+int			in_parent_proc(pid_t *pids, int n);
+pid_t		ft_fork(void);
+
 #endif

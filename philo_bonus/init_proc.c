@@ -6,7 +6,7 @@
 /*   By: obouizga <obouizga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 15:20:04 by obouizga          #+#    #+#             */
-/*   Updated: 2022/08/02 08:22:49 by obouizga         ###   ########.fr       */
+/*   Updated: 2022/08/08 12:13:08 by obouizga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,27 @@ t_philo **get_philos_prop(t_arg *args, sem_t *semaph, sem_t *w_lock)
 	return (phv);
 }
 
+// void	create_procs(int num_ph, t_cmp *comp, int m)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (i < num_ph)
+// 	{
+// 		if (i % 2 == m)
+// 		{
+// 			comp->pids[i] = fork();
+// 			if (comp->pids[i] == -1)
+// 				fork_fail();
+// 			if (!comp->pids[i])
+// 				setup_routines(comp->philos[i]);
+// 		}
+// 		if (comp->pids[i])
+// 			usleep(100);
+// 		i++;
+// 	}
+// }
+
 void	create_procs(int num_ph, t_cmp *comp, int m)
 {
 	int	i;
@@ -58,13 +79,12 @@ void	create_procs(int num_ph, t_cmp *comp, int m)
 	{
 		if (i % 2 == m)
 		{
-			comp->pids[i] = fork();
-			if (comp->pids[i] == -1)
-				fork_fail();
+			if (!in_parent_proc(comp->pids, num_ph))
+				comp->pids[i] = ft_fork();
 			if (!comp->pids[i])
 				setup_routines(comp->philos[i]);
 		}
-		if (comp->pids[i])
+		if (!in_parent_proc(comp->pids, num_ph))
 			usleep(100);
 		i++;
 	}
@@ -78,9 +98,7 @@ t_cmp	*launch_procs(t_arg *args)
 	comp = malloc(sizeof(t_cmp));
 	if (!comp)
 		malloc_fail();
-	comp->pids = malloc(sizeof(pid_t) * args->num_ph);
-	if (!comp->pids)
-		malloc_fail();
+	comp->pids = set_pids(args->num_ph);
 	sem_unlink("forks_semaph");
 	comp->semaph = sem_open("forks_semaph", O_CREAT | O_EXCL, 0777, args->num_ph);
 	sem_unlink("write_lock");
